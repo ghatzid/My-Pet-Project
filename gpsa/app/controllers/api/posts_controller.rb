@@ -17,12 +17,6 @@ class Api::PostsController < ApplicationController
 
     render json: post
   end
-
-  def create
-    Post.create(params[:post])
-
-    render json: post
-  end
   
   def create
  

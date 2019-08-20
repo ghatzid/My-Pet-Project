@@ -4,10 +4,13 @@ document.addEventListener('DOMContentLoaded', () => {
   const URL = 'http://localhost:3000/api/posts/'
   let addImage = false
   let editImg = false
+  let commentFormShow = false
   const addBtn = document.querySelector('#new-gpsa-btn')
   const gpsaCollection = document.querySelector('#gpsa-collection')
   const addGpsaForm = document.querySelector('.add-gpsa-form')
   const editGpsaForm = document.querySelector('.edit-gpsa-form')
+  const addCommentForm = document.querySelector('.add-comment-form')
+  const commentList = document.querySelector('.comment-list')
 
   getPosts()
 
@@ -36,7 +39,6 @@ document.addEventListener('DOMContentLoaded', () => {
     commentButton = document.querySelector(`.comment-btn[data-comment-id="${gpsa.id}"]`)
 
     likeButton.addEventListener('click', e => {
-      // adds to # of likes for gpsa when like button is clicked
       likeImage(gpsa,e)
     })
 
@@ -54,11 +56,25 @@ document.addEventListener('DOMContentLoaded', () => {
     })
 
     commentButton.addEventListener('click', e => {
+      addCommentForm.setAttribute("dataset-comment-id", `${gpsa.id}`)
+      postId = document.querySelector(`[dataset-comment-id="${gpsa.id}"]`).value = `${gpsa.id}`
       id = e.target.dataset.commentId
-      showComments(id)
+      showComments(gpsa,e)
+      commentFormShow = !commentFormShow
+      commentText = document.querySelector(`[placeholder="Enter a comment..."]`)
+      return (commentFormShow) ?(addCommentForm.style.display = 'block') : (addCommentForm.style.display = 'none')
     })
   }
 
+  function showComments(gpsa)
+  {
+
+    commentList.innerText = ""
+    gpsa.comments.forEach(comment => {
+      commentList.insertAdjacentHTML("beforeend",`
+      <p>${comment.content}</p>`)
+    });
+  }
 
   function postImage(gpsa_data) 
   { // POST new gpsa object to JSON
@@ -99,7 +115,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function deleteImage(e){
-    // debugger  
     return fetch(`http://localhost:3000/api/posts/${e.target.dataset.deleteId}`, {
       method: "DELETE",
       headers:{ "Content-Type": "application/json",
@@ -110,7 +125,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function editImage(gpsaId){
-    debugger
     return fetch(`http://localhost:3000/api/posts/${gpsaId}`, {
       method: "PATCH",
       headers:{ "Content-Type": "application/json",
@@ -125,6 +139,23 @@ document.addEventListener('DOMContentLoaded', () => {
     .then(gpsa => document.querySelector(`.gpsa-text[data-text-id="${gpsa.id}"]`).innerText=`"${gpsa.name}"`)
     .then(gpsa => document.querySelector(`.gpsa-image[data-img-id="${gpsa.id}"]`).innerHTML = `<img class="gpsa-image" data-img-id="${gpsa.id}" src="${gpsa.image}">`)  
   }
+
+  function addComment(postId) {
+    // debugger 
+    return fetch('http://localhost:3000/api/comments/', {
+      method: "POST",
+      headers:{ "Content-Type": "application/json",
+      "Accept": "application/json" },
+      body: JSON.stringify({
+        "content": document.querySelector(`[placeholder="Enter a comment..."]`).value,
+        "post_id": postId
+      })
+    })
+    .then(res => res.json())
+    .then(res => document.querySelector('.comment-list').insertAdjacentHTML("beforeend",`<p>${res.content}</p>`))
+}
+
+
 
   //Event Listeners/////////////////////////////////////
 
@@ -149,6 +180,12 @@ document.addEventListener('DOMContentLoaded', () => {
     editImage(gpsaId,e)
   })
 
+  addCommentForm.addEventListener('submit', e=> {
+    // debugger
+    e.preventDefault()
+    addComment(postId,e)
+  })
+  
 
 })
     

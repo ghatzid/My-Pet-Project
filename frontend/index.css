@@ -28,7 +28,7 @@ body {
 #gpsa-collection {
   flex-direction: column;
   align-self: auto;
-  /* margin: 6rem; */
+  margin-top: 6rem;
 }
 
 .card {
@@ -112,6 +112,20 @@ button:hover {
   z-index: 9;
 }
 
+.add-comment-form{
+  overflow: scroll;
+  padding: 1rem;
+  width: flex;
+  height: 500px;
+  display: none;
+  opacity: .95;
+  background-color: #e04b52;
+  position: fixed;
+  top: 126px;
+  right: 10px;
+  border: 3px solid #f1f1f1;
+  z-index: 9;
+}
 
 .submit {
   position: relative;
@@ -140,4 +154,8 @@ button:hover {
   font-size: 18px;
   font-family: monospace;
   margin: 3px;
+}
+
+div.comment-list {
+
 }
