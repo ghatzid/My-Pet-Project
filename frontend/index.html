@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Generic Photo Sharing App</title>
+    
+    <div class="container">
+        <form class="add-gpsa-form" style="">
+          <h3>Upload a photo or something</h3>
+  
+          <input type="text" name="name" value="" placeholder="Enter a photo name..." class="input-text">
+          <br>
+          <input type="text" name="image" value="" placeholder="Enter a image URL..." class="input-text">
+          <br>
+          <input type="submit" name="submit" value="Post" class="submit">
+        </form>
+      </div>
+   
+        <form class="edit-gpsa-form" dataset-form-id="" style="">
+          <h3>Edit a cat</h3>
+  
+          <input type="text" name="name" value="" placeholder="Enter a name..." class="input-text">
+          <br>
+          <input type="text" name="image" value="" placeholder="Edit image URL..." class="input-text">
+          <br>
+          <input type="submit" name="submit" value="Submit " class="submit">
+        </form>
+      </div>  
+
+      
+      
+    <link rel="stylesheet" href="index.css">
+  </head>
+  <body>
+    
+    <div id='gpsa-header'>
+      <img src="https://fontmeme.com/permalink/190818/5b60e393f0ef6ae0c0f9a4f08b393d26.png" alt="gpsa-header">
+      <p style='text-align:center' >Upload a photo or something <button id='new-gpsa-btn'>Upload image!</button>
+    </div>
+    
+    <div id="gpsa-collection">
+    </div>
+
+    
+
+    <script type="text/javascript" src="src/index.js"></script>
+  </body>
+</html>
