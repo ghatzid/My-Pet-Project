@@ -32,7 +32,15 @@
 #   likes: 20
 # )
 
-Comment.create(
-  content: "testing testing okay",
-  post_id: 14
+# Comment.create(
+#   content: "testing testing okay",
+#   post_id: 14
+# )
+
+1.times do
+Post.create(
+  name: "test",
+  image: "https://thecatapi.com/v1/images?api_key=7484a4a4-4e74-42e4-ac05-62d8cb94406b",
+  likes: 20
 )
+end

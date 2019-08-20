@@ -64,6 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
       commentText = document.querySelector(`[placeholder="Enter a comment..."]`)
       return (commentFormShow) ?(addCommentForm.style.display = 'block') : (addCommentForm.style.display = 'none')
     })
+    
   }
 
   function showComments(gpsa)
@@ -185,7 +186,18 @@ document.addEventListener('DOMContentLoaded', () => {
     e.preventDefault()
     addComment(postId,e)
   })
-  
+
+  document.querySelector('.close-add').addEventListener('click', () => {
+    document.querySelector('.close-add').parentElement.style.display = 'none'
+  })
+
+  document.querySelector('.close-edit').addEventListener('click', () => {
+    document.querySelector('.close-edit').parentElement.style.display = 'none'
+  })
+
+  document.querySelector('.close-comment').addEventListener('click', () => {
+    document.querySelector('.close-commen').parentElement.style.display = 'none'
+  })
 
 })
     

@@ -156,6 +156,23 @@ button:hover {
   margin: 3px;
 }
 
-div.comment-list {
 
+
+
+/* Style the close button (span) */
+.close-add {
+  cursor: pointer;
+  padding: 12px 16px;
 }
+.close-edit {
+  cursor: pointer;
+  padding: 12px 16px;
+}
+.close-comment {
+  /* justify-content: right; */
+  cursor: pointer;
+  padding: 12px 16px;
+}
+.close-add:hover {background: rgb(228, 160, 160);}
+.close-edit:hover {background: rgb(228, 160, 160);}
+.close-comment:hover {background: rgb(228, 160, 160);}
