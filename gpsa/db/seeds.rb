@@ -6,7 +6,6 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 # Post.create(
-
 #   name:"The Big One",
 #   image:"https://cdn2.thecatapi.com/images/blg.jpg",
 #   likes: 65
@@ -37,10 +36,30 @@
 #   post_id: 14
 # )
 
-1.times do
-Post.create(
-  name: "test",
-  image: "https://thecatapi.com/v1/images?api_key=7484a4a4-4e74-42e4-ac05-62d8cb94406b",
-  likes: 20
-)
+# 1.times do
+# Post.create(
+#   name: "test",
+#   image: "https://thecatapi.com/v1/images?api_key=7484a4a4-4e74-42e4-ac05-62d8cb94406b",
+#   likes: 20
+# )
+# end
+
+
+require 'httparty'
+url_array = []
+50.times do
+  url = 'https://api.thecatapi.com/v1/images/search?api_key=7484a4a4-4e74-42e4-ac05-62d8cb94406b'
+  response = HTTParty.get(url)
+  parsed_response = (response.parsed_response)
+  cat_image = parsed_response[0]["url"]
+
+
+  Post.create(
+    name: Faker::Creature::Cat.name,
+    image: cat_image,
+    likes: rand(1..1000)
+  )
+
+
 end
+

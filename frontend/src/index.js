@@ -1,25 +1,44 @@
 //https://thecatapi.com/v1/images?api_key=7484a4a4-4e74-42e4-ac05-62d8cb94406b
-
 document.addEventListener('DOMContentLoaded', () => {
+  let pageNumber = 1
   const URL = 'http://localhost:3000/api/posts/'
   let addImage = false
   let editImg = false
   let commentFormShow = false
   const addBtn = document.querySelector('#new-gpsa-btn')
   const gpsaCollection = document.querySelector('#gpsa-collection')
+  let infScroll = new InfiniteScroll( '.gpsa-container', {
+    path: function() {
+        return 'http://localhost:3000/api/posts/?per_page=5&page=' + (1 + this.pageIndex)
+      },
+    responseType: 'text', 
+    status: '.scroll-status',
+    history: false})
   const addGpsaForm = document.querySelector('.add-gpsa-form')
   const editGpsaForm = document.querySelector('.edit-gpsa-form')
   const addCommentForm = document.querySelector('.add-comment-form')
   const commentList = document.querySelector('.comment-list')
-
   getPosts()
 
   function getPosts(){
-    fetch(URL)
+    fetch(`http://localhost:3000/api/posts/?per_page=5&page=1`)
     .then(response => response.json())
     .then(gpsas => gpsas.forEach(gpsa => {renderPosts(gpsa)}))
   }
-
+  
+  //   var elem = gpsaCollection
+  // var pckry = new Packery( elem, {
+    //   // options
+    //   itemSelector: '.card',
+    //   gutter: 10
+    // });
+    
+    
+    infScroll.on( 'load', function( response ) {
+      // debugger
+    var data = JSON.parse( response )
+    data.map(renderPosts)
+  });
   function renderPosts(gpsa) {
     gpsaCollection.insertAdjacentHTML("beforeend",`
     <div class="card" data-card-id="${gpsa.id}"> 
@@ -137,7 +156,7 @@ document.addEventListener('DOMContentLoaded', () => {
       })
     })  
     .then(res => res.json())
-    .then(gpsa => document.querySelector(`.gpsa-text[data-text-id="${gpsa.id}"]`).innerText=`"${gpsa.name}"`)
+    .then(gpsa => document.querySelector(`.gpsa-text[data-text-id="${gpsa.id}"]`).innerText=`${gpsa.name}`)
     .then(gpsa => document.querySelector(`.gpsa-image[data-img-id="${gpsa.id}"]`).innerHTML = `<img class="gpsa-image" data-img-id="${gpsa.id}" src="${gpsa.image}">`)  
   }
 

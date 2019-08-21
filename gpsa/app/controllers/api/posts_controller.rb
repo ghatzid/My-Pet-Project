@@ -2,9 +2,9 @@ class Api::PostsController < ApplicationController
   def index
     posts = Post.all
 
-    render json: posts
+    paginate json: posts
   end
-
+  
   def show
     post = Post.find(params[:id])
 
