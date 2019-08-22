@@ -215,7 +215,7 @@ document.addEventListener('DOMContentLoaded', () => {
   })
 
   document.querySelector('.close-comment').addEventListener('click', () => {
-    document.querySelector('.close-commen').parentElement.style.display = 'none'
+    document.querySelector('.close-comment').parentElement.style.display = 'none'
   })
 
 })
