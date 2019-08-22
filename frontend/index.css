@@ -41,6 +41,8 @@ body {
   box-shadow:  0px 0px 40px 10px rgba(0,0,0,0.64); 
 }
 
+
+
 .gpsa-image {
 max-width: 320px;
 max-height: auto px;
@@ -62,13 +64,13 @@ max-height: auto px;
 button {
   /* position: relative; */
   background-color: #e04b52;
-  border: none;
+  /* border: none; */
   border-radius: 24px;
   height: 3rem;
-  width: max-content;
+  /* width: max-content; */
   color: whitesmoke;
-  font-size: 14px;
-  justify-self: center;
+  font-size: 13px;
+  /* justify-self: center; */
   z-index: 1;
 }
 
@@ -116,14 +118,15 @@ button:hover {
 .add-comment-form{
   overflow: scroll;
   padding: 1rem;
-  width: flex;
-  height: 500px;
+  /* width: element(".card"); */
+  height: 300px;
   display: none;
   opacity: .95;
   background-color: #e04b52;
-  position: fixed;
-  top: 126px;
-  right: 10px;
+  position: absolute
+  transform: translateY(2000px);
+  /* top: 126px;
+  right: 10px; */
   border: 3px solid #f1f1f1;
   z-index: 9;
 }
