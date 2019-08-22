@@ -1,6 +1,5 @@
 //https://thecatapi.com/v1/images?api_key=7484a4a4-4e74-42e4-ac05-62d8cb94406b
 document.addEventListener('DOMContentLoaded', () => {
-  let pageNumber = 1
   const URL = 'http://localhost:3000/api/posts/'
   let addImage = false
   let editImg = false
@@ -9,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const gpsaCollection = document.querySelector('#gpsa-collection')
   let infScroll = new InfiniteScroll( '.gpsa-container', {
     path: function() {
-        return 'http://localhost:3000/api/posts/?per_page=5&page=' + (1 + this.pageIndex)
+        return 'http://localhost:3000/api/posts/?per_page=10&page=' + (1 + this.pageIndex)
       },
     responseType: 'text', 
     status: '.scroll-status',
@@ -47,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
       
       <p>
         <button class="like-btn" data-like-id="${gpsa.id}">${gpsa.likes} Likes <3</button>
-        <button class="comment-btn" data-comment-id="${gpsa.id}">Comment</button>
+        <button class="comment-btn" data-comment-id="${gpsa.id}">${gpsa.comments.length} Comments</button>
         <button class="delete-btn" data-delete-id="${gpsa.id}">Delete</button>
         <button class="edit-btn" data-edit-id="${gpsa.id}">Edit</button>
     </div>`)
@@ -145,6 +144,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function editImage(gpsaId){
+    // debugger
     return fetch(`http://localhost:3000/api/posts/${gpsaId}`, {
       method: "PATCH",
       headers:{ "Content-Type": "application/json",
@@ -156,8 +156,10 @@ document.addEventListener('DOMContentLoaded', () => {
       })
     })  
     .then(res => res.json())
-    .then(gpsa => document.querySelector(`.gpsa-text[data-text-id="${gpsa.id}"]`).innerText=`${gpsa.name}`)
-    .then(gpsa => document.querySelector(`.gpsa-image[data-img-id="${gpsa.id}"]`).innerHTML = `<img class="gpsa-image" data-img-id="${gpsa.id}" src="${gpsa.image}">`)  
+    .then(gpsa => {
+      document.querySelector(`.gpsa-text[data-text-id="${gpsa.id}"]`).innerText=`${gpsa.name}` 
+      document.querySelector(`.gpsa-image[data-img-id="${gpsa.id}"]`).src = `${gpsa.image}` 
+    })
   }
 
   function addComment(postId) {
@@ -192,18 +194,19 @@ document.addEventListener('DOMContentLoaded', () => {
     // send form data to POST
     event.preventDefault()
     postImage(event.target)
-    console.log("Form Data Sent to POST")
+    addGpsaForm.style.display = 'none'
   })
 
   editGpsaForm.addEventListener('submit', e => {
     e.preventDefault()
     editImage(gpsaId,e)
+    editGpsaForm.style.display = 'none'
   })
 
   addCommentForm.addEventListener('submit', e=> {
-    // debugger
     e.preventDefault()
     addComment(postId,e)
+    addCommentForm.reset()
   })
 
   document.querySelector('.close-add').addEventListener('click', () => {
