@@ -134,6 +134,9 @@ document.addEventListener('DOMContentLoaded', () => {
     )
   }
 
+
+
+
   function deleteImage(e){
     return fetch(`http://localhost:3000/api/posts/${e.target.dataset.deleteId}`, {
       method: "DELETE",
@@ -143,6 +146,8 @@ document.addEventListener('DOMContentLoaded', () => {
   .then(res => res.json())
   .then(e.target.parentNode.parentNode.remove()) 
   }
+
+  
 
   function editImage(gpsaId){
     // debugger
