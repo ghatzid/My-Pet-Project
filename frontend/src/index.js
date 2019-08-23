@@ -42,8 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
     gpsaCollection.insertAdjacentHTML("beforeend",`
     <div class="card" data-card-id="${gpsa.id}"> 
       <span class="gpsa-text" data-text-id="${gpsa.id}">${gpsa.name}</span>
-      <img class="gpsa-image" data-img-id="${gpsa.id}" src= ${gpsa.image}></img>
-      
+      <img class="gpsa-image" data-img-id="${gpsa.id}" src=${gpsa.image}></img>
       <p>
         <button class="like-btn" data-like-id="${gpsa.id}">${gpsa.likes} Likes <3</button>
         <button class="comment-btn" data-comment-id="${gpsa.id}">${gpsa.comments.length} Comments</button>
@@ -74,6 +73,8 @@ document.addEventListener('DOMContentLoaded', () => {
     })
 
     commentButton.addEventListener('click', e => {
+      
+      e.target.parentElement.appendChild(addCommentForm)
       addCommentForm.setAttribute("dataset-comment-id", `${gpsa.id}`)
       postId = document.querySelector(`[dataset-comment-id="${gpsa.id}"]`).value = `${gpsa.id}`
       id = e.target.dataset.commentId
@@ -133,6 +134,9 @@ document.addEventListener('DOMContentLoaded', () => {
     )
   }
 
+
+
+
   function deleteImage(e){
     return fetch(`http://localhost:3000/api/posts/${e.target.dataset.deleteId}`, {
       method: "DELETE",
@@ -142,6 +146,8 @@ document.addEventListener('DOMContentLoaded', () => {
   .then(res => res.json())
   .then(e.target.parentNode.parentNode.remove()) 
   }
+
+  
 
   function editImage(gpsaId){
     // debugger
