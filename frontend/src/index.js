@@ -38,6 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
     var data = JSON.parse( response )
     data.map(renderPosts)
   });
+  
   function renderPosts(gpsa) {
     gpsaCollection.insertAdjacentHTML("beforeend",`
     <div class="card" data-card-id="${gpsa.id}"> 
