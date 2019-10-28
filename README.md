@@ -1,24 +1,29 @@
-# README
+## My Pet Project
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+An imageboard for cat lovers to post, like and comment on pictures of their cats!
 
-Things you may want to cover:
+## Motivation
 
-* Ruby version
+Like many people on social media, I like cats and always enjoy liking/sharing cat photos..  One of the projects I was assigned at Flatiron was to create a web app using vanilla Javascript for the frontend.  My Pet Project is my stab at creating a cat themed imageboard in the vein of sites such as Imgur or Pintrest.  
 
-* System dependencies
+## Frameworks
+This app uses React and Rails API with a SqLite database on the back end. The API is seeded with random cat names using the [Faker](https://github.com/faker-ruby/faker) gem.  Cat images are initially seeded by calling [TheCatAPI](https://thecatapi.com/) and using [HTTP Party](https://github.com/jnunemaker/httparty) to interface with a RESTFUL service in Ruby.
 
-* Configuration
 
-* Database creation
+## Installation
 
-* Database initialization
+Fork/Clone this repo, then navigate to the repo directory titled 'backend' in your terminal and run the following commands:
 
-* How to run the test suite
+``` bash
+bundle install
+rails db:setup
+rails db:seed
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+## How to use
 
-* Deployment instructions
-
-* ...
+Navigate to the 'backend' directory and run:
+``` bash
+rails s
+```
+Then naviagate to the 'frontend' directory and open index.html in the web browser of your choice.
