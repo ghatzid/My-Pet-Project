@@ -26,4 +26,4 @@ Navigate to the 'backend' directory and run:
 ``` bash
 rails s
 ```
-Then naviagate to the 'frontend' directory and open index.html in the web browser of your choice.
+Then navigate to the 'frontend' directory and open index.html in the web browser of your choice.
